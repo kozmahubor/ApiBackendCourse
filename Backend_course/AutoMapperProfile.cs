@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Backend_course.Dtos.Armor;
 using Backend_course.Dtos.Skill;
 using Backend_course.Dtos.Weapon;
 
@@ -16,6 +17,7 @@ namespace Backend_course
             CreateMap<UpdateCharacterDto, Character>();
             CreateMap<Weapon, GetWeaponDto>();
             CreateMap<Skill, GetSkillDto>();
+            CreateMap<Armor, GetArmorDto>();
         }
     }
 }

@@ -73,6 +73,13 @@ namespace Backend_course.Controllers
             return Ok(await _characterService.AddCharacterSkill(newCharacterSkill));
         }
 
+        [HttpPost("Armor")]
+        public async Task<ActionResult<ServiceResponse<GetCharacterDto>>>
+        AddCharacterArmor(AddCharacterArmorDto newCharacterArmor)
+        {
+            return Ok(await _characterService.AddCharacterArmor(newCharacterArmor));
+        }
+
 
     }
 }

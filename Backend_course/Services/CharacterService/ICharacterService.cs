@@ -14,5 +14,7 @@ namespace Backend_course.Services.CharacterService
         Task<ServiceResponse<List<GetCharacterDto>>> DeleteCharacter(int id);
         Task<ServiceResponse<List<GetCharacterDto>>> DeleteAllCharacter();
         Task<ServiceResponse<GetCharacterDto>> AddCharacterSkill(AddCharacterSkillDto newCharacterSkill);
+        Task<ServiceResponse<GetCharacterDto>> AddCharacterArmor(AddCharacterArmorDto newCharacterArmor);
+
     }
 }

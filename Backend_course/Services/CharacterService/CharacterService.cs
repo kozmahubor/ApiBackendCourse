@@ -53,6 +53,7 @@ namespace Backend_course.Services.CharacterService
                     await _context.Characters
                         .Include(c => c.Weapon)
                         .Include(c => c.Skills)
+                        .Include(c => c.Armors)
                         .Where(c => c.User!.Id == GetUserId()).ToListAsync();
 
             serviceResponse.Data = dbCharacters.Select(c => _mapper.Map<GetCharacterDto>(c)).ToList();
@@ -66,6 +67,7 @@ namespace Backend_course.Services.CharacterService
             var dbCharacter = await _context.Characters
             .Include(c => c.Weapon)
             .Include(c => c.Skills)
+            .Include(c => c.Armors)
             .FirstOrDefaultAsync(c => c.Id == id && c.User!.Id == GetUserId());
             serviceResponse.Data = _mapper.Map<GetCharacterDto>(dbCharacter);
 
@@ -175,6 +177,7 @@ namespace Backend_course.Services.CharacterService
                 var character = await _context.Characters
                     .Include(c => c.Weapon)
                     .Include(c => c.Skills)
+                    .Include(c => c.Armors)
                     .FirstOrDefaultAsync(c => c.Id == newCharacterSkill.CharacterId &&
                         c.User!.Id == GetUserId());
 
@@ -206,6 +209,53 @@ namespace Backend_course.Services.CharacterService
                 response.Data = _mapper.Map<GetCharacterDto>(character);
             }
             catch(Exception ex) {
+                response.Success = false;
+                response.Message = ex.Message;
+            }
+
+            return response;
+        }
+        public async Task<ServiceResponse<GetCharacterDto>> AddCharacterArmor(AddCharacterArmorDto newCharacterArmor)
+        {
+            var response = new ServiceResponse<GetCharacterDto>();
+            try
+            {
+                var character = await _context.Characters
+                    .Include(c => c.Weapon)
+                    .Include(c => c.Skills)
+                    .Include(c => c.Armors)
+                    .FirstOrDefaultAsync(c => c.Id == newCharacterArmor.CharacterId &&
+                        c.User!.Id == GetUserId());
+
+                if (character is null)
+                {
+                    response.Success = false;
+                    response.Message = "Character was not found!";
+                    return response;
+                }
+
+                var armor = await _context.Armors
+                    .FirstOrDefaultAsync(a => a.Id == newCharacterArmor.ArmorId);
+
+                if (armor is null)
+                {
+                    response.Success = false;
+                    response.Message = "Armor was not found!";
+                    return response;
+                }
+                else if (character.Armors!.Contains(armor))
+                {
+                    response.Success = false;
+                    response.Message = "This character already has this armor!";
+                    return response;
+                }
+
+                character.Armors!.Add(armor);
+                await _context.SaveChangesAsync();
+                response.Data = _mapper.Map<GetCharacterDto>(character);
+            }
+            catch (Exception ex)
+            {
                 response.Success = false;
                 response.Message = ex.Message;
             }

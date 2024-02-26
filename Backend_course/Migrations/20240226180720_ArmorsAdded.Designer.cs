@@ -4,6 +4,7 @@ using Backend_course.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Backend_course.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20240226180720_ArmorsAdded")]
+    partial class ArmorsAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -57,31 +60,31 @@ namespace Backend_course.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("892e830b-5854-416c-ac08-10cca04b2e23"),
+                            Id = new Guid("9c349ea0-44dc-4ef1-b280-2750fa9ef209"),
                             Name = "Helmet",
                             Resist = 10
                         },
                         new
                         {
-                            Id = new Guid("e93670d0-75bb-497c-92ea-7cb820ff96db"),
+                            Id = new Guid("926df240-4214-44d5-9dd1-03a7dc10f975"),
                             Name = "Chestplate",
                             Resist = 30
                         },
                         new
                         {
-                            Id = new Guid("c19d8d3d-ad93-4f0c-8488-5dc309bae0e0"),
+                            Id = new Guid("b389f7d3-e060-4584-a60f-9741475b67f1"),
                             Name = "Leggings",
                             Resist = 20
                         },
                         new
                         {
-                            Id = new Guid("39a832b5-7ca9-4241-80c1-e3f5828dedbc"),
+                            Id = new Guid("601c0da6-17d6-4553-9795-453ec11d79a2"),
                             Name = "Boots",
                             Resist = 15
                         },
                         new
                         {
-                            Id = new Guid("95c1c556-a7b1-4bd6-9805-7cbdca7cfffc"),
+                            Id = new Guid("7b741263-1b93-40c0-a85a-1943c099cfb9"),
                             Name = "Shield",
                             Resist = 50
                         });
